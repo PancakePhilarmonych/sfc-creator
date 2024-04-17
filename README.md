@@ -1,4 +1,4 @@
-# SFC Component
+# SFC Creator
 
 ### Description
 
