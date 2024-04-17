@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  frontend-admin:
+    environment:
+      - API_URL=http://localhost:3000
+    build:
+      context: .
+      dockerfile: ./frontend-admin/Dockerfile
+    ports:
+      - "8081:8081"
+    volumes:
+      - /app/node_modules 
+      - ./frontend-admin:/app
+      - shared:/app/shared
+
+  frontend-client:
+    build:
+      context: .
+      dockerfile: ./frontend-client/Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - /app/node_modules
+      - ./frontend-client:/app
+      - shared:/app/shared
+
+  backend-api:
+    build:
+      context: ./backend-api
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend-api:/app
+
+volumes:
+  shared:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/shared
+      o: bind
