@@ -11,8 +11,14 @@ import { computed } from 'vue'
 
 export default {
   props: {
-    height: String,
-    width: String
+    height: {
+      type: String,
+      default: '500px'
+    },
+    width: {
+      type: String,
+      default: 'auto'
+    }
   },
   setup(props) {
     const showCaseStyles = computed(() => {
